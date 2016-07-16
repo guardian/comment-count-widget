@@ -1,0 +1,46 @@
+{
+  "name": "guardian-comment-count",
+  "description": "Standalone widget for comment count",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/guardian/comment-count-widget",
+  "main": "dist/comment-count.amd.js",
+  "jsnext:main": "dist/comment-count.es6.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "compile": "rollup -c rollup.config.amd.js && rollup -c rollup.config.es6.js",
+    "clean": "rm -rf tmp && mkdir -p tmp && rm -rf dist",
+    "lint": "eslint src test",
+    "karma-ci": "karma --single-run --no-auto-watch --no-colors start",
+    "karma-dev": "karma start",
+    "coverage-check": "istanbul check-coverage --statements 60 --function 60 --branches 60 --lines 60",
+    "example": "node example/server.js",
+    "pretest": "npm run clean",
+    "test": "npm run karma-ci",
+    "posttest": "npm run lint && npm run coverage-check",
+    "dev": "npm run karma-dev"
+  },
+  "devDependencies": {
+    "babel-preset-es2015-rollup": "^1.1.1",
+    "es5-shim": "^4.5.9",
+    "es6-shim": "^0.35.1",
+    "eslint": "^3.0.1",
+    "express": "^4.14.0",
+    "istanbul": "^0.4.4",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.1.1",
+    "karma-coverage": "^1.1.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-rollup-plugin": "^0.2.0",
+    "karma-spec-reporter": "0.0.26",
+    "promise-polyfill": "^5.2.1",
+    "rollup": "^0.34.1",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-commonjs": "^3.1.0",
+    "rollup-plugin-istanbul": "^1.0.0",
+    "rollup-plugin-node-resolve": "^1.7.1"
+  }
+}
