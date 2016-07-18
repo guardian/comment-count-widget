@@ -18,10 +18,11 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            './node_modules/promise-polyfill/promise.js',
-            './node_modules/es5-shim/es5-shim.min.js',
-            './node_modules/es6-shim/es6-shim.min.js',
-            'test/*.js'
+            { pattern: './node_modules/promise-polyfill/promise.js', watched: false },
+            { pattern: './node_modules/es5-shim/es5-shim.min.js', watched: false },
+            { pattern: './node_modules/es6-shim/es6-shim.min.js', watched: false },
+            'test/*.js',
+            { pattern: 'src/**/*.js', included: false, watched: true, served: false }
         ],
 
 
