@@ -15,17 +15,18 @@ Alternatively you can use JSPM or any other package manager that supports NPM.
 In your HTML use the custom tag
 
 ```html
-<comment-count></comment-count>
+<comment-count data-discussion-id="1234"></comment-count>
 ```
 
 In your JavaScript
 
 ```js
-import { refreshCount } from 'guardian-comment-count';
+import { load as loadCommentCount } from 'guardian-comment-count';
 
 // Somewhere after page load
-refreshCount({
-    apibase: '//api.comments.com'
+loadCommentCount({
+    apiBase: '//api.comments.com',
+    apiQuery: 'ids'
 });
 ```
 
@@ -39,6 +40,61 @@ The widget runs on modern browsers and assumes the following features are availa
 
 * `Promise`, [polyfill](https://github.com/taylorhakes/promise-polyfill)
 * `Array.from`, you can polifyll with [es6-shim](https://github.com/paulmillr/es6-shim)
+* `fetch`, [polyfill](https://github.com/github/fetch)
+
+### Advanced Usage
+
+#### Filtering
+
+You might want to skip the comment count for certain elements depending on your A/B tests or other configuration. The `filter` function receives the custom DOM elements and works like `Array.filter`, return `true` to keep loading the comment count or `false` to skip it.
+
+```js
+import { load } from 'guardian-comment-count';
+
+load({
+    filter: function (node) {
+        // node is the custom DOM element
+        const anything = node.getAttribute('data-anything');
+        return ABTest.running() === anything;
+    }
+});
+```
+
+#### Update count
+
+If you want to update the count of all elements you can simply call `load` again, but if you only want to load the value of nodes that haven't been loaded yet (for instance because you're ajax-ing in new one) you can call
+
+```js
+import { load, update } from 'guardian-comment-count';
+
+const widgetConfig = {
+    apiBase: '//api.comments.com',
+    apiQuery: 'ids'
+};
+
+load(widgetConfig);
+
+eventBus.on('new-elements-added-to-the-page', () => {
+    update(widgetConfig);
+});
+```
+
+#### Error reporting
+
+Both `load` and `update` return a `Promise`
+
+```js
+import { load } from 'guardian-comment-count';
+
+load({})
+.then(() => {
+    // All elements have been updated
+})
+.catch(error => {
+    // Something's wrong
+});
+```
+
 
 
 
