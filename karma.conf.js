@@ -75,11 +75,11 @@ module.exports = function(config) {
         concurrency: Infinity,
 
         rollupPreprocessor: {
-            plugins: [
+            plugins: (config.singleRun ? [
                 istanbul({
                     exclude: ['test/**/*.js', 'node_modules/**/*.js']
                 })
-            ].concat(rollupOpts.plugins),
+            ] : []).concat(rollupOpts.plugins),
             // will help to prevent conflicts between different tests entries
             format: 'iife',
             sourceMap: 'inline'
