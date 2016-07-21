@@ -19,8 +19,9 @@ describe('Errors', function() {
         }, config))
         .catch(error => {
             expect(error.message).toBe('invalid');
-            done();
-        });
+        })
+        .then(done)
+        .catch(done.error);
     });
 
     it('rejects with error if server response is not ok', function(done) {
@@ -34,8 +35,9 @@ describe('Errors', function() {
         }, config))
         .catch(error => {
             expect(error.message).toMatch(/error status/i);
-            done();
-        });
+        })
+        .then(done)
+        .catch(done.error);
     });
 
     it('rejects with error if server response cannot be understood', function(done) {
@@ -51,7 +53,8 @@ describe('Errors', function() {
         }, config))
         .catch(error => {
             expect(error.message).toMatch(/invalid server response/i);
-            done();
-        });
+        })
+        .then(done)
+        .catch(done.error);
     });
 });

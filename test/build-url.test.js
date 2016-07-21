@@ -1,11 +1,11 @@
 import { load } from '../src/index';
 import { inject, clear } from './lib/inject';
+import config from './lib/base-config';
 
 describe('Build URL', function() {
     afterEach(function() {
         clear();
     });
-    const config = { apiBase: 'api', apiQuery: 'ids'};
     const ignoreResponse = Promise.resolve({
         ok: true,
         json () {
@@ -14,11 +14,11 @@ describe('Build URL', function() {
     });
 
     it('does nothing if custom elements are not present', function(done) {
-        load(Object.assign({
+        load(config({
             fetch () {
                 return Promise.reject('should not call fetch');
             }
-        }, config))
+        }))
         .then(done)
         .catch(done.error);
     });
@@ -26,13 +26,13 @@ describe('Build URL', function() {
     it('creates an URL for a single custom element', function(done) {
         inject('<comment-count data-discussion-id="one"></comment-count>');
 
-        load(Object.assign({
+        load(config({
             fetch (path) {
                 expect(path).toBe('api?ids=one');
 
                 return ignoreResponse;
             }
-        }, config))
+        }))
         .then(done)
         .catch(done.error);
     });
@@ -44,14 +44,14 @@ describe('Build URL', function() {
             '<comment-count data-discussion-id="/p/3"></comment-count>'
         ]);
 
-        load(Object.assign({
+        load(config({
             fetch (path) {
                 expect(path).toBe('api?ids=one,/two/,/p/3');
 
                 done();
                 return ignoreResponse;
             }
-        }, config))
+        }))
         .then(done)
         .catch(done.error);
     });
@@ -63,7 +63,7 @@ describe('Build URL', function() {
             '<comment-count data-discussion-id="three"></comment-count>'
         ]);
 
-        load(Object.assign({
+        load(config({
             filter (node) {
                 return node.getAttribute('data-discussion-id') !== 'three';
             },
@@ -73,7 +73,7 @@ describe('Build URL', function() {
                 done();
                 return ignoreResponse;
             }
-        }, config))
+        }))
         .then(done)
         .catch(done.error);
     });
@@ -85,14 +85,14 @@ describe('Build URL', function() {
             '<comment-count data-discussion-id="three"></comment-count>'
         ]);
 
-        load(Object.assign({
+        load(config({
             filter () {
                 return false;
             },
             fetch () {
                 return Promise.reject('should not call fetch');
             }
-        }, config))
+        }))
         .then(done)
         .catch(done.error);
     });

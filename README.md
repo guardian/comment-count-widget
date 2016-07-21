@@ -102,6 +102,26 @@ load({})
 });
 ```
 
+#### Update callback
+
+Pass an optional callback to be notified of changes on custom tags
+
+```js
+import { load } from 'guardian-comment-count';
+
+load({
+    onupdate: (node, count) => {
+        // node is the DOM element
+        // count the numerical comment count
+    }
+})
+.catch(error => {
+    // Errors in the onupdate method bubble up here
+});
+```
+
+You can use the callback for instance to hide the icon of discussions with 0 comments.
+By default the widget does not set the text to `0`.
 
 
 
