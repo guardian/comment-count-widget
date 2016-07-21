@@ -1,15 +1,18 @@
+import fastdom from 'fastdom';
+
 export function findElements (isUpdate, userFilter = () => true) {
-    // TODO fastdom?
-    const shouldProcess = isUpdate ? filterLoaded : () => true;
-    const widgets = document.getElementsByTagName('comment-count');
-    const nodes = [];
-    for (let i = 0, len = widgets.length; i < len; i += 1) {
-        const node = widgets[i];
-        if (shouldProcess(node) && userFilter(node)) {
-            nodes.push(node);
+    return new Promise(resolve => {
+        const shouldProcess = isUpdate ? filterLoaded : () => true;
+        const widgets = document.getElementsByTagName('comment-count');
+        const nodes = [];
+        for (let i = 0, len = widgets.length; i < len; i += 1) {
+            const node = widgets[i];
+            if (shouldProcess(node) && userFilter(node)) {
+                nodes.push(node);
+            }
         }
-    }
-    return Promise.resolve(nodes);
+        resolve(nodes);
+    });
 }
 
 function filterLoaded (node) {
@@ -22,5 +25,10 @@ export function getDiscussionId (node) {
 }
 
 export function setText (node, count) {
-    node.innerText = count;
+    return new Promise(resolve => {
+        fastdom.write(() => {
+            node.innerText = count;
+            resolve();
+        });
+    });
 }

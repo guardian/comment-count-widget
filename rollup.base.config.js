@@ -5,12 +5,15 @@ const nodeResolve = require('rollup-plugin-node-resolve');
 module.exports = {
     entry: 'src/index.js',
     plugins: [
-        babel(),
+        babel({
+            exclude: ['node_modules/fastdom/**']
+        }),
         nodeResolve({
             jsnext: true,
             main: true,
             preferBuiltins: true
         }),
         commonjs()
-    ]
+    ],
+    external: ['fastdom']
 };

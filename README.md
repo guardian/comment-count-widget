@@ -39,8 +39,15 @@ You can style the custom tags independently of this widget as any other HTML tag
 The widget runs on modern browsers and assumes the following features are available
 
 * `Promise`, [polyfill](https://github.com/taylorhakes/promise-polyfill)
-* `Array.from`, you can polifyll with [es6-shim](https://github.com/paulmillr/es6-shim)
 * `fetch`, [polyfill](https://github.com/github/fetch)
+
+#### Peer dependencies
+
+Some libraries are kept as peer dependencies, users of this widget will have to provide them.
+
+* `fastdom`
+
+
 
 ### Advanced Usage
 

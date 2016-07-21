@@ -10,8 +10,8 @@ import {
     callWith
 } from './utils';
 
-export const load = callWith(init, { isUpdate: false});
-export const update = callWith(init, { isUpdate: true});
+export const load = callWith(init, { isUpdate: false });
+export const update = callWith(init, { isUpdate: true });
 
 function init ({
     apiBase, apiQuery, fetch, filter, isUpdate
@@ -40,13 +40,12 @@ function callApi (fetch, url) {
 }
 
 function updateNodes (nodes, counts) {
-    nodes.forEach(node => {
+    return Promise.all(nodes.map(node => {
         const discussionId = getDiscussionId(node);
         const count = counts[discussionId];
 
-        if (count) {
-            // TODO fastdom
-            setText(node, count);
-        }
-    });
+        const updateAction = count > 0 ? setText : () => {};
+
+        return updateAction(node, count);
+    }));
 }
