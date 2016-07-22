@@ -16,8 +16,7 @@ export function findElements (isUpdate, userFilter = () => true) {
 }
 
 function filterLoaded (node) {
-    // TODO something
-    return node ? true : true;
+    return node.widgetLoaded !== true;
 }
 
 export function getDiscussionId (node) {
@@ -31,4 +30,8 @@ export function setText (node, count) {
             resolve();
         });
     });
+}
+
+export function markLoaded (node) {
+    node.widgetLoaded = true;
 }

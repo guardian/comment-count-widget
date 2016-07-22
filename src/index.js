@@ -1,7 +1,8 @@
 import {
     findElements,
     getDiscussionId,
-    setText
+    setText,
+    markLoaded
 } from './dom';
 import {
     asIdCountMap,
@@ -41,6 +42,7 @@ function callApi (fetch, url) {
 
 function updateNodes (nodes, counts, onupdate) {
     return Promise.all(nodes.map(node => {
+        markLoaded(node);
         const discussionId = getDiscussionId(node);
         const count = counts[discussionId] || 0;
 
