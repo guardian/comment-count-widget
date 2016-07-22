@@ -19,7 +19,11 @@ export function asIdCountMap (json) {
 }
 
 export function buildUrl (apiBase, apiQuery, listIds) {
-    return `${apiBase}?${apiQuery}=${listIds.join(',')}`;
+    const uniques = {};
+    listIds.forEach(id => {
+        uniques[id] = true;
+    });
+    return `${apiBase}?${apiQuery}=${Object.keys(uniques).join(',')}`;
 }
 
 export function callWith (fn, defaults) {
