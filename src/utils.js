@@ -27,3 +27,7 @@ export function callWith (fn, defaults) {
         return fn(Object.assign(defaults, params));
     };
 }
+
+export function identity (val) {
+    return val;
+}

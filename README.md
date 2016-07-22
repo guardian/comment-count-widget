@@ -51,6 +51,20 @@ Some libraries are kept as peer dependencies, users of this widget will have to 
 
 ### Advanced Usage
 
+#### Number formatting
+
+By default the widget's text is set to whatever values comes from the server.
+You can apply custom formatting (e.g. convert from 1000 to 1,000) using the optional `format` function
+
+```js
+import { load } from 'guardian-comment-count';
+import { numberFormatting } from 'number-utility';
+
+load({
+    format: numberFormatting
+});
+```
+
 #### Filtering
 
 You might want to skip the comment count for certain elements depending on your A/B tests or other configuration. The `filter` function receives the custom DOM elements and works like `Array.filter`, return `true` to keep loading the comment count or `false` to skip it.
@@ -59,7 +73,7 @@ You might want to skip the comment count for certain elements depending on your 
 import { load } from 'guardian-comment-count';
 
 load({
-    filter: function (node) {
+    filter (node) {
         // node is the custom DOM element
         const anything = node.getAttribute('data-anything');
         return ABTest.running() === anything;
