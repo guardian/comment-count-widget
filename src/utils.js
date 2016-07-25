@@ -8,11 +8,10 @@ export function asJson (response) {
 
 export function asIdCountMap (json) {
     if (json && json.counts && 'length' in json.counts) {
-        const map = {};
-        json.counts.forEach(value => {
+        return json.counts.reduce((map, value) => {
             map[value.id] = value.count;
-        });
-        return map;
+            return map;
+        }, {});
     } else {
         return Promise.reject(new Error('Invalid server response'));
     }
