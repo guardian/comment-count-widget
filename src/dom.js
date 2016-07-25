@@ -1,6 +1,6 @@
 import fastdom from 'fastdom';
 
-export function findElements (isUpdate, userFilter = () => true) {
+export function findElements (Promise, isUpdate, userFilter = () => true) {
     return new Promise(resolve => {
         const shouldProcess = isUpdate ? filterLoaded : () => true;
         const widgets = document.getElementsByTagName('comment-count');
@@ -23,7 +23,7 @@ export function getDiscussionId (node) {
     return node.getAttribute('data-discussion-id');
 }
 
-export function setText (node, count) {
+export function setText (Promise, node, count) {
     return new Promise(resolve => {
         fastdom.write(() => {
             node.innerText = count;

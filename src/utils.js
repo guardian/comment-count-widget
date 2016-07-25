@@ -2,7 +2,7 @@ export function asJson (response) {
     if (response.ok) {
         return response.json();
     } else {
-        return Promise.reject(new Error(response.statusText));
+        throw new Error(response.statusText);
     }
 }
 
@@ -13,7 +13,7 @@ export function asIdCountMap (json) {
             return map;
         }, {});
     } else {
-        return Promise.reject(new Error('Invalid server response'));
+        throw new Error('Invalid server response');
     }
 }
 

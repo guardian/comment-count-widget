@@ -41,6 +41,9 @@ The widget runs on modern browsers and assumes the following features are availa
 * `Promise`, [polyfill](https://github.com/taylorhakes/promise-polyfill)
 * `fetch`, [polyfill](https://github.com/github/fetch)
 
+You can use dependency injection to pass them in case you're not using a polyfill.
+
+
 #### Peer dependencies
 
 Some libraries are kept as peer dependencies, users of this widget will have to provide them.
@@ -136,6 +139,19 @@ load({
 
 You can use the callback for instance to hide the icon of discussions with 0 comments.
 By default the widget does not set the text to `0`.
+
+### Dependency Injection
+
+```js
+import { load } from 'guardian-comment-count';
+import { Promise } from 'bluebird';
+import { customFetch } from 'fetch';
+
+load({
+    fetch: customFetch,
+    Promise: Promise
+});
+```
 
 
 
