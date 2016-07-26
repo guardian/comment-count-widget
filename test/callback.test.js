@@ -9,7 +9,7 @@ describe('Callback', function() {
     });
 
     it('calls a user callback after setting the widget value', function(done) {
-        const container = inject('<comment-count data-discussion-id="one"></comment-count>');
+        const container = inject('<comment-count discussion="one"></comment-count>');
         const onupdate = jasmine.createSpy('onupdate');
 
         load(config({
@@ -29,8 +29,8 @@ describe('Callback', function() {
 
     it('does not handle errors in update callback, letting them bubble up', function(done) {
         inject([
-            '<comment-count data-discussion-id="one"></comment-count>',
-            '<comment-count data-discussion-id="two"></comment-count>'
+            '<comment-count discussion="one"></comment-count>',
+            '<comment-count discussion="two"></comment-count>'
         ]);
         const onupdate = jasmine.createSpy('onupdate').and.callFake(() => { throw new Error('In callback'); });
 

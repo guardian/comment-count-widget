@@ -9,7 +9,7 @@ describe('Format', function() {
     });
 
     it('formats the comment count', function(done) {
-        const container = inject('<comment-count data-discussion-id="format"></comment-count>');
+        const container = inject('<comment-count discussion="format"></comment-count>');
 
         load(config({
             fetch: okResponse([

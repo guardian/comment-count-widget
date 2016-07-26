@@ -3,7 +3,7 @@ import { inject, clear } from './lib/inject';
 
 describe('Errors', function() {
     beforeEach(function() {
-        inject('<comment-count data-discussion-id="one"></comment-count>');
+        inject('<comment-count discussion="one"></comment-count>');
     });
     afterEach(function() {
         clear();

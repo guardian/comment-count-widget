@@ -10,8 +10,8 @@ describe('Load', function() {
 
     it('sets the text according to the API', function(done) {
         const container = inject([
-            '<comment-count data-discussion-id="one"></comment-count>',
-            '<comment-count data-discussion-id="two"></comment-count>'
+            '<comment-count discussion="one"></comment-count>',
+            '<comment-count discussion="two"></comment-count>'
         ]);
 
         load(config({
@@ -30,8 +30,8 @@ describe('Load', function() {
 
     it('ignores elements for which there is no comment count', function(done) {
         const container = inject([
-            '<comment-count data-discussion-id="one"></comment-count>',
-            '<comment-count data-discussion-id="two"></comment-count>'
+            '<comment-count discussion="one"></comment-count>',
+            '<comment-count discussion="two"></comment-count>'
         ]);
 
         load(config({

@@ -15,7 +15,7 @@ Alternatively you can use JSPM or any other package manager that supports NPM.
 In your HTML use the custom tag
 
 ```html
-<comment-count data-discussion-id="1234"></comment-count>
+<comment-count discussion="1234"></comment-count>
 ```
 
 In your JavaScript

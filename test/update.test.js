@@ -9,7 +9,7 @@ describe('Update', function() {
     });
 
     it('updates only the elements added after the last load', function(done) {
-        const firstContainer = inject('<comment-count data-discussion-id="before"></comment-count>');
+        const firstContainer = inject('<comment-count discussion="before"></comment-count>');
         const loadCallback = jasmine.createSpy('loadCallback');
         const updateCallback = jasmine.createSpy('updateCallback');
 
@@ -25,7 +25,7 @@ describe('Update', function() {
             expect(loadCallback).toHaveBeenCalledWith(firstContainer.querySelector('comment-count'), 99);
         })
         .then(() => {
-            const secondContainer = inject('<comment-count data-discussion-id="after"></comment-count>');
+            const secondContainer = inject('<comment-count discussion="after"></comment-count>');
 
             return update(config({
                 fetch: okResponse([
@@ -49,8 +49,8 @@ describe('Update', function() {
 
     it('marks widgets with 0 comments as loaded, but not the one filtered out', function(done) {
         const firstContainer = inject([
-            '<comment-count data-discussion-id="zero"></comment-count>',
-            '<comment-count data-discussion-id="ignore"></comment-count>'
+            '<comment-count discussion="zero"></comment-count>',
+            '<comment-count discussion="ignore" ignore></comment-count>'
         ]);
         const loadCallback = jasmine.createSpy('loadCallback');
         const updateCallback = jasmine.createSpy('updateCallback');
@@ -59,14 +59,14 @@ describe('Update', function() {
             fetch: okResponse([]),
             onupdate: loadCallback,
             filter (node) {
-                return node.dataset.discussionId !== 'ignore';
+                return !node.hasAttribute('ignore');
             }
         }))
         .then(() => {
             expect(loadCallback).toHaveBeenCalledTimes(1);
         })
         .then(() => {
-            const secondContainer = inject('<comment-count data-discussion-id="non-zero"></comment-count>');
+            const secondContainer = inject('<comment-count discussion="non-zero"></comment-count>');
 
             return update(config({
                 fetch: okResponse([
@@ -91,7 +91,7 @@ describe('Update', function() {
     });
 
     it('loads all elements if the previous load was an error', function(done) {
-        const firstContainer = inject('<comment-count data-discussion-id="error"></comment-count>');
+        const firstContainer = inject('<comment-count discussion="error"></comment-count>');
         const loadCallback = jasmine.createSpy('loadCallback');
         const updateCallback = jasmine.createSpy('updateCallback');
 
@@ -105,7 +105,7 @@ describe('Update', function() {
             expect(error.message).toMatch(/error on load/);
         })
         .then(() => {
-            const secondContainer = inject('<comment-count data-discussion-id="update-success"></comment-count>');
+            const secondContainer = inject('<comment-count discussion="update-success"></comment-count>');
 
             return update(config({
                 fetch: okResponse([

@@ -10,7 +10,7 @@ logPromise(load(config));
 
 document.querySelector('.add').addEventListener('click', () => {
     const node = document.createElement('div');
-    node.innerHTML = `<comment-count data-discussion-id="up${++COUNT}">?</comment-count>`;
+    node.innerHTML = `<comment-count discussion="up${++COUNT}">?</comment-count>`;
     document.body.appendChild(node);
 });
 document.querySelector('.load').addEventListener('click', () => {

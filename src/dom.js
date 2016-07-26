@@ -20,7 +20,7 @@ function filterLoaded (node) {
 }
 
 export function getDiscussionId (node) {
-    return node.getAttribute('data-discussion-id');
+    return node.getAttribute('discussion');
 }
 
 export function setText (Promise, node, count) {

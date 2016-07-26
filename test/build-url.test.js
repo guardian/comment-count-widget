@@ -24,7 +24,7 @@ describe('Build URL', function() {
     });
 
     it('creates an URL for a single custom element', function(done) {
-        inject('<comment-count data-discussion-id="one"></comment-count>');
+        inject('<comment-count discussion="one"></comment-count>');
 
         load(config({
             fetch (path) {
@@ -39,9 +39,9 @@ describe('Build URL', function() {
 
     it('creates an URL for multiple custom elements', function(done) {
         inject([
-            '<comment-count data-discussion-id="one"></comment-count>',
-            '<comment-count data-discussion-id="/two/"></comment-count>',
-            '<comment-count data-discussion-id="/p/3"></comment-count>'
+            '<comment-count discussion="one"></comment-count>',
+            '<comment-count discussion="/two/"></comment-count>',
+            '<comment-count discussion="/p/3"></comment-count>'
         ]);
 
         load(config({
@@ -58,14 +58,14 @@ describe('Build URL', function() {
 
     it('filters out some elements from the URL', function(done) {
         inject([
-            '<comment-count data-discussion-id="one"></comment-count>',
-            '<comment-count data-discussion-id="two"></comment-count>',
-            '<comment-count data-discussion-id="three"></comment-count>'
+            '<comment-count discussion="one"></comment-count>',
+            '<comment-count discussion="two"></comment-count>',
+            '<comment-count discussion="three"></comment-count>'
         ]);
 
         load(config({
             filter (node) {
-                return node.getAttribute('data-discussion-id') !== 'three';
+                return node.getAttribute('discussion') !== 'three';
             },
             fetch (path) {
                 expect(path).toBe('api?ids=one,two');
@@ -80,9 +80,9 @@ describe('Build URL', function() {
 
     it('does nothing if all elements are filtered out', function(done) {
         inject([
-            '<comment-count data-discussion-id="one"></comment-count>',
-            '<comment-count data-discussion-id="two"></comment-count>',
-            '<comment-count data-discussion-id="three"></comment-count>'
+            '<comment-count discussion="one"></comment-count>',
+            '<comment-count discussion="two"></comment-count>',
+            '<comment-count discussion="three"></comment-count>'
         ]);
 
         load(config({
