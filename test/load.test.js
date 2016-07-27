@@ -46,4 +46,30 @@ describe('Load', function() {
         .then(done)
         .catch(done.error);
     });
+
+    it('waits on the update action', function(done) {
+        inject([
+            '<comment-count discussion="one"></comment-count>'
+        ]);
+        let resolvePendingPromise, isLoadResolved = false;
+        const pendingPromise = new Promise(resolve => resolvePendingPromise = resolve);
+
+        load(config({
+            fetch: okResponse([
+                { id: 'one', count: 120 }
+            ]),
+            onupdate () {
+                setTimeout(function() {
+                    expect(isLoadResolved).toBe(false, 'isLoadResolved');
+                    resolvePendingPromise();
+                }, 50);
+                return pendingPromise;
+            }
+        }))
+        .then(() => {
+            isLoadResolved = true;
+        })
+        .then(done)
+        .catch(done.error);
+    });
 });

@@ -52,7 +52,7 @@ function updateNodes (Promise, nodes, counts, format, onupdate) {
         return updateAction(Promise, node, format(count))
             .then(()=> {
                 if (onupdate) {
-                    onupdate(node, count);
+                    return onupdate(node, count);
                 }
             });
     }));
