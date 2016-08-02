@@ -25,9 +25,10 @@ export function buildUrl (apiBase, apiQuery, listIds) {
     return `${apiBase}?${apiQuery}=${Object.keys(uniques).join(',')}`;
 }
 
-export function callWith (fn, defaults) {
-    return function(params) {
-        return fn(Object.assign(defaults, params));
+export function callWithUpdate (fn, update) {
+    return function(params = {}) {
+        params.isUpdate = update;
+        return fn(params);
     };
 }
 

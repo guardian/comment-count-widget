@@ -8,12 +8,12 @@ import {
     asIdCountMap,
     asJson,
     buildUrl,
-    callWith,
+    callWithUpdate,
     identity
 } from './utils';
 
-export const load = callWith(init, { isUpdate: false });
-export const update = callWith(init, { isUpdate: true });
+export const load = callWithUpdate(init, false);
+export const update = callWithUpdate(init, true);
 
 function init ({
     apiBase, apiQuery, fetch = window.fetch, filter, isUpdate, onupdate, format = identity, Promise = window.Promise
