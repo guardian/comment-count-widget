@@ -20,7 +20,7 @@ describe('Update', function() {
             onupdate: loadCallback
         }))
         .then(() => {
-            expect(firstContainer.querySelector('comment-count').innerText).toBe('99');
+            expect(firstContainer.querySelector('comment-count').textContent).toBe('99');
             expect(loadCallback).toHaveBeenCalledTimes(1);
             expect(loadCallback).toHaveBeenCalledWith(firstContainer.querySelector('comment-count'), 99);
         })
@@ -34,7 +34,7 @@ describe('Update', function() {
                 onupdate: updateCallback
             }))
             .then(() => {
-                expect(secondContainer.querySelector('comment-count').innerText).toBe('10');
+                expect(secondContainer.querySelector('comment-count').textContent).toBe('10');
                 expect(updateCallback).toHaveBeenCalledTimes(1);
                 expect(updateCallback).toHaveBeenCalledWith(secondContainer.querySelector('comment-count'), 10);
             });
@@ -76,7 +76,7 @@ describe('Update', function() {
                 // no filter in update
             }))
             .then(() => {
-                expect(secondContainer.querySelector('comment-count').innerText).toBe('10');
+                expect(secondContainer.querySelector('comment-count').textContent).toBe('10');
                 expect(updateCallback).toHaveBeenCalledTimes(2);
                 expect(updateCallback).toHaveBeenCalledWith(firstContainer[1].querySelector('comment-count'), 0);
                 expect(updateCallback).toHaveBeenCalledWith(secondContainer.querySelector('comment-count'), 10);
@@ -115,8 +115,8 @@ describe('Update', function() {
                 onupdate: updateCallback
             }))
             .then(() => {
-                expect(firstContainer.querySelector('comment-count').innerText).toBe('4');
-                expect(secondContainer.querySelector('comment-count').innerText).toBe('3');
+                expect(firstContainer.querySelector('comment-count').textContent).toBe('4');
+                expect(secondContainer.querySelector('comment-count').textContent).toBe('3');
                 expect(updateCallback).toHaveBeenCalledTimes(2);
                 expect(updateCallback).toHaveBeenCalledWith(firstContainer.querySelector('comment-count'), 4);
                 expect(updateCallback).toHaveBeenCalledWith(secondContainer.querySelector('comment-count'), 3);

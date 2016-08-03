@@ -20,7 +20,7 @@ describe('Format', function() {
             }
         }))
         .then(() => {
-            expect(container.querySelector('comment-count').innerText).toBe('formatted-5000');
+            expect(container.querySelector('comment-count').textContent).toBe('formatted-5000');
         })
         .then(done)
         .catch(done.error);

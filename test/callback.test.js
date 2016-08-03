@@ -19,7 +19,7 @@ describe('Callback', function() {
             onupdate
         }))
         .then(() => {
-            expect(container.querySelector('comment-count').innerText).toBe('15');
+            expect(container.querySelector('comment-count').textContent).toBe('15');
             expect(onupdate).toHaveBeenCalledTimes(1);
             expect(onupdate.calls.argsFor(0)).toEqual([container.querySelector('comment-count'), 15]);
         })

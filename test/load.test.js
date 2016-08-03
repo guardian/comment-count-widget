@@ -21,8 +21,8 @@ describe('Load', function() {
             ])
         }))
         .then(() => {
-            expect(container[0].querySelector('comment-count').innerText).toBe('10');
-            expect(container[1].querySelector('comment-count').innerText).toBe('5');
+            expect(container[0].querySelector('comment-count').textContent).toBe('10');
+            expect(container[1].querySelector('comment-count').textContent).toBe('5');
         })
         .then(done)
         .catch(done.error);
@@ -40,8 +40,8 @@ describe('Load', function() {
             ])
         }))
         .then(() => {
-            expect(container[0].querySelector('comment-count').innerText).toBe('120');
-            expect(container[1].querySelector('comment-count').innerText).toBe('');
+            expect(container[0].querySelector('comment-count').textContent).toBe('120');
+            expect(container[1].querySelector('comment-count').textContent).toBe('');
         })
         .then(done)
         .catch(done.error);
