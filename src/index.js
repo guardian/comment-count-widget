@@ -17,7 +17,7 @@ export const update = callWithUpdate(init, true);
 
 function init ({
     apiBase, apiQuery, fetch = window.fetch, filter, isUpdate, onupdate, format = identity, Promise = window.Promise
-} = {}) {
+}) {
     if (!apiBase || !apiQuery) {
         return Promise.reject(new Error('Missing or invalid `apiBase` or `apiQuery`'));
     } else {

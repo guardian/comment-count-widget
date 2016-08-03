@@ -26,7 +26,11 @@ export function getDiscussionId (node) {
 export function setText (Promise, node, count) {
     return new Promise(resolve => {
         fastdom.write(() => {
-            node.innerText = count;
+            if ('innerText' in node) {
+                node.innerText  = count;
+            } else {
+                node.textContent = count;
+            }
             resolve();
         });
     });
