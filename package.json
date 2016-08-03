@@ -1,7 +1,7 @@
 {
   "name": "guardian-comment-count",
   "description": "Standalone widget for comment count",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "license": "Apache-2.0",
   "repository": "https://github.com/guardian/comment-count-widget",
   "main": "dist/comment-count.amd.js",
